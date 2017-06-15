@@ -1,0 +1,15 @@
+{
+  "name"         : "FAKE_REST_CNI",
+  "version"      : "0.0.1",
+  "description"  : "Serviços REST ExtratorCRM",
+  "main"         : "server.js",
+  "author"       : "Nelson Júnior",
+  "dependencies" : {
+    "express"     : "~4.7.2",
+    "body-parser" : "~1.17.2",
+    "faker"       : "~4.1.0",
+    "lodash"      : "~4.17.4",
+    "dateformat"  : "~2.0.0",
+    "cpf_cnpj"    : "0.2.0"
+    }
+}
