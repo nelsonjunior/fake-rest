@@ -117,10 +117,10 @@ app.get('/:recurso/', function(req, res) {
 
 });
 
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 3000
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0";
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
-var server = app.listen(server_port, server_ip_address, function() {
-  console.log("Listening on " + server_ip_address + ", server_port " + server_port)
+var server = app.listen(port, ipaddress, function() {
+  console.log("Listening on " + ipaddress + ", server_port " + port)
 
 })
