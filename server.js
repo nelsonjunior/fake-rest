@@ -18,8 +18,8 @@ function getDados(recurso, pSize) {
           numeroLinhaArquivo: 1,
           dataAlteracaoRegistro: dateFormat(faker.date.between('2015-01-01', '2017-12-31'), "dd/MM/yyyy HH:mm"),
           excluido: 0,
-          codigoEntidade: 1,
-          codigoRegional: 7,
+          codigoEntidade: 6,
+          codigoRegional: 2,
           nomeSistema: "CRM",
           cnpj: CNPJ.generate(true),
           dataCriacaoConta: dateFormat(faker.date.between('2015-01-01', '2017-12-31'), "dd/MM/yyyy HH:mm"),
@@ -34,8 +34,8 @@ function getDados(recurso, pSize) {
           numeroLinhaArquivo: 1,
           dataAlteracaoRegistro: dateFormat(faker.date.between('2015-01-01', '2017-12-31'), "dd/MM/yyyy HH:mm"),
           excluido: 0,
-          codigoEntidade: 1,
-          codigoRegional: 7,
+          codigoEntidade: 6,
+          codigoRegional: 2,
           nomeSistema: 'CRM',
           cnpj: CNPJ.generate(true),
           dataContato: dateFormat(faker.date.between('2015-01-01', '2017-12-31'), "dd/MM/yyyy HH:mm"),
@@ -45,6 +45,45 @@ function getDados(recurso, pSize) {
           emailPessoaFisica: faker.internet.email()
         }
       });
+
+    case 'contatos-ac':
+      return _.times(pSize, function(n) {
+        return {
+          numeroLayout: 2,
+          numeroLinhaArquivo: 1,
+          dataAlteracaoRegistro: dateFormat(faker.date.between('2015-01-01', '2017-12-31'), "dd/MM/yyyy HH:mm"),
+          excluido: 0,
+          codigoEntidade: 6,
+          codigoRegional: 2,
+          nomeSistema: 'CRM',
+          cnpj: CNPJ.generate(true),
+          dataContato: dateFormat(faker.date.between('2015-01-01', '2017-12-31'), "dd/MM/yyyy HH:mm"),
+          nomePessoaFisica: faker.name.findName(),
+          cargoPessoaFisica: faker.name.jobType(),
+          telefonePessoaFisica: faker.helpers.replaceSymbolWithNumber("(##) 9####-#### "),
+          emailPessoaFisica: faker.internet.email()
+        }
+      });
+
+    case 'contatos-al':
+      return _.times(pSize, function(n) {
+        return {
+          numeroLayout: 2,
+          numeroLinhaArquivo: 1,
+          dataAlteracaoRegistro: dateFormat(faker.date.between('2015-01-01', '2017-12-31'), "dd/MM/yyyy HH:mm"),
+          excluido: 0,
+          codigoEntidade: 6,
+          codigoRegional: 3,
+          nomeSistema: 'CRM',
+          cnpj: CNPJ.generate(true),
+          dataContato: dateFormat(faker.date.between('2015-01-01', '2017-12-31'), "dd/MM/yyyy HH:mm"),
+          nomePessoaFisica: faker.name.findName(),
+          cargoPessoaFisica: faker.name.jobType(),
+          telefonePessoaFisica: faker.helpers.replaceSymbolWithNumber("(##) 9####-#### "),
+          emailPessoaFisica: faker.internet.email()
+        }
+      });
+
 
 
     default:
@@ -99,6 +138,7 @@ app.get('/:recurso/', function(req, res) {
 
     retorno.content = dados;
     retorno.numberOfElements = pSize;
+    retorno.totalElements = pSize * 2;
     retorno.number = pNumber;
     retorno.size = pSize;
     retorno.totalPages = 2;
