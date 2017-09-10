@@ -109,6 +109,59 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+
+app.get('/:p/:recurso/', function(req, res) {
+
+  //console.log(JSON.stringify(req.headers));
+
+
+  faker.locale = "pt_BR";
+
+  console.log(req.params.p)
+  console.log(req.params.recurso)
+  console.log(req.headers.authorization);
+  console.log(req.query.pageSize);
+  console.log(req.query.pageNumber);
+  console.log(req.query.dataModificacao);
+
+
+  var pNumber = new Number(req.query.pageNumber);
+  var pSize = new Number(req.query.pageSize);
+  var recurso = req.params.recurso;
+
+  var p = req.params.p;
+
+  if (req.headers.authorization !== 'token') {
+    res.status(401);
+    res.end("authentication is required and has failed or has not yet been provided");
+  } else {
+
+    var dados = getDados(recurso, pSize);
+
+    var retorno = new Object();
+
+    retorno.content = dados;
+    retorno.numberOfElements = pSize;
+    retorno.totalElements = pSize * p;
+    retorno.number = pNumber;
+    retorno.size = pSize;
+    retorno.totalPages = p;
+    retorno.totalElements;
+    retorno.last = pNumber == retorno.totalPages ? true : false;
+    retorno.firt = pNumber == 1 ? true : false;
+
+    res.type('json');
+    res.end(
+      JSON.stringify(
+        retorno
+      )
+    );
+  }
+
+
+});
+
+
 app.get('/:recurso/', function(req, res) {
 
   //console.log(JSON.stringify(req.headers));
@@ -126,6 +179,7 @@ app.get('/:recurso/', function(req, res) {
   var pNumber = new Number(req.query.pageNumber);
   var pSize = new Number(req.query.pageSize);
   var recurso = req.params.recurso;
+
 
   if (req.headers.authorization !== 'token') {
     res.status(401);
