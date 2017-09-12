@@ -27,6 +27,22 @@ function getDados(recurso, pSize) {
         }
       });
 
+    case 'contas-al':
+      return _.times(pSize, function(n) {
+        return {
+          numeroLayout: 1,
+          numeroLinhaArquivo: 1,
+          dataAlteracaoRegistro: dateFormat(faker.date.between('2015-01-01', '2017-12-31'), "dd/MM/yyyy HH:mm"),
+          excluido: 0,
+          codigoEntidade: 6,
+          codigoRegional: 3,
+          nomeSistema: "CRM",
+          cnpj: CNPJ.generate(true),
+          dataCriacaoConta: dateFormat(faker.date.between('2015-01-01', '2017-12-31'), "dd/MM/yyyy HH:mm"),
+          razaoSocial: faker.company.companyName()
+        }
+      });
+
     case 'contatos':
       return _.times(pSize, function(n) {
         return {
